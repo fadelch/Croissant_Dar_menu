@@ -1,9 +1,9 @@
 import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { BrandMark } from "@/components/ui/brand-mark";
 import { Container } from "@/components/ui/container";
-import { Link } from "@/i18n/navigation";
 import { getAlternateLocale } from "@/i18n/routing";
 
 export function SiteHeader() {

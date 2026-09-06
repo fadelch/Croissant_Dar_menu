@@ -1,14 +1,14 @@
-import { defineRouting } from "next-intl/routing";
+export const locales = ["en", "ar"] as const;
+export const defaultLocale = "en" as const;
+export const localeCookieName = "croissant_dar_locale";
+export const localeCookieMaxAgeSeconds = 60 * 60 * 24 * 365;
 
-export const routing = defineRouting({
-  locales: ["ar", "en"],
-  defaultLocale: "ar",
-  localePrefix: "always",
-  localeDetection: false,
-});
-
-export type Locale = (typeof routing.locales)[number];
+export type Locale = (typeof locales)[number];
 export type Direction = "rtl" | "ltr";
+
+export function isLocale(value: string | undefined): value is Locale {
+  return locales.some((locale) => locale === value);
+}
 
 export function getDirection(locale: Locale): Direction {
   return locale === "ar" ? "rtl" : "ltr";
