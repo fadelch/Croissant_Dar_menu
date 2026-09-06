@@ -17,3 +17,10 @@ Copy `.env.example` to `.env.local` and provide the Firebase client values. Add
 the Firebase Admin values only when future server-side features need them.
 Authentication, menu data, cart, admin, and ordering behavior are intentionally
 deferred to later phases.
+
+## Firestore foundation
+
+Phase 3 defines the `admins`, `categories`, and `menuItems` collections through
+strict TypeScript models, Zod schemas, validated read mappings, public read
+services, Firestore rules, and focused composite indexes. It does not seed menu
+data or add database write operations.
