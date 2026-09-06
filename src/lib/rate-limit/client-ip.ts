@@ -6,6 +6,10 @@ export const UNKNOWN_CLIENT_IP = "unknown-client";
 
 const MAX_IP_LENGTH = 64;
 
+type RequestWithHeaders = {
+  headers: { get(name: string): string | null };
+};
+
 function removeOptionalPort(value: string): string {
   if (value.startsWith("[")) {
     const closingBracket = value.indexOf("]");
@@ -75,7 +79,7 @@ function firstForwardedValue(value: string | null): string | null {
  * Uses the first x-forwarded-for value, then x-real-ip. These headers are only
  * trustworthy when the deployment proxy replaces untrusted client values.
  */
-export function getClientIp(request: Request): string {
+export function getClientIp(request: RequestWithHeaders): string {
   return (
     normalizeIp(firstForwardedValue(request.headers.get("x-forwarded-for"))) ??
     normalizeIp(request.headers.get("x-real-ip")) ??

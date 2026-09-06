@@ -1,6 +1,7 @@
 export const FIRESTORE_COLLECTIONS = {
   admins: "admins",
   categories: "categories",
+  categorySlugs: "categorySlugs",
   menuItems: "menuItems",
 } as const;
 

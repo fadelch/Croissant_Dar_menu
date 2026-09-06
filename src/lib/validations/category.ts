@@ -3,6 +3,8 @@ import { z } from "zod";
 
 import type { CategoryDocument, CreateCategoryInput, UpdateCategoryInput } from "@/types/category";
 
+export const categoryIdSchema = z.string().trim().min(1).max(1_500).regex(/^[^/]+$/);
+
 const categoryInputShape = {
   nameAr: z.string().trim().min(1).max(120),
   nameEn: z.string().trim().min(1).max(120).optional(),
