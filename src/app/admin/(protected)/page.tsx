@@ -1,13 +1,4 @@
-const dashboardSections = [
-  {
-    title: "Menu management",
-    description: "Menu item tools will be added in a later phase.",
-  },
-  {
-    title: "Category management",
-    description: "Category tools will be added in a later phase.",
-  },
-] as const;
+import Link from "next/link";
 
 export default function AdminDashboardPage() {
   return (
@@ -19,15 +10,31 @@ export default function AdminDashboardPage() {
       </p>
 
       <div className="mt-10 grid gap-5 md:grid-cols-2">
-        {dashboardSections.map((section) => (
-          <section key={section.title} className="rounded-3xl border border-brown-900/10 bg-white p-7 shadow-sm">
-            <span className="inline-flex rounded-full bg-cream-100 px-3 py-1 text-xs font-bold text-brown-700">
-              Coming later
-            </span>
-            <h2 className="mt-5 text-xl font-black text-brown-900">{section.title}</h2>
-            <p className="mt-3 leading-7 text-brown-700">{section.description}</p>
-          </section>
-        ))}
+        <section className="rounded-3xl border border-caramel-500/25 bg-white p-7 shadow-sm">
+          <span className="inline-flex rounded-full bg-green-50 px-3 py-1 text-xs font-bold text-green-800">
+            Available
+          </span>
+          <h2 className="mt-5 text-xl font-black text-brown-900">Category management</h2>
+          <p className="mt-3 leading-7 text-brown-700">
+            Create, edit, order, enable, disable, and safely delete categories.
+          </p>
+          <Link
+            href="/admin/categories"
+            className="mt-6 inline-flex rounded-full bg-brown-900 px-5 py-2.5 text-sm font-bold text-cream-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500"
+          >
+            Manage Categories
+          </Link>
+        </section>
+
+        <section className="rounded-3xl border border-brown-900/10 bg-white p-7 shadow-sm">
+          <span className="inline-flex rounded-full bg-cream-100 px-3 py-1 text-xs font-bold text-brown-700">
+            Coming later
+          </span>
+          <h2 className="mt-5 text-xl font-black text-brown-900">Menu management</h2>
+          <p className="mt-3 leading-7 text-brown-700">
+            Menu item tools will be added in Phase 7.
+          </p>
+        </section>
       </div>
     </main>
   );

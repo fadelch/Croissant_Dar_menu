@@ -7,3 +7,4 @@ export { getClientIp } from "@/lib/rate-limit/client-ip";
 export { createRateLimitHeaders, RateLimitUnavailableError } from "@/lib/rate-limit/limiter";
 
 export const authSessionLimiter = configuredRateLimiter(RATE_LIMIT_POLICIES.authSession);
+export const adminMutationLimiter = configuredRateLimiter(RATE_LIMIT_POLICIES.adminMutation);
