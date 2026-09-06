@@ -16,8 +16,9 @@ preference cookie without creating `/en` and `/ar` pages.
 
 Copy `.env.example` to `.env.local` and provide the Firebase client values. Add
 the Firebase Admin values only when future server-side features need them.
-Administrator authentication is documented below. Public menu data, management
-CRUD, cart, and ordering behavior remain deferred to later phases.
+Administrator authentication is documented below. Public menu display,
+menu-item management, cart, and ordering behavior remain deferred to later
+phases.
 
 ## Firestore foundation
 
@@ -99,7 +100,29 @@ Next.js session exchange and its server-side Firebase work; it does **not**
 rate-limit incorrect password attempts that fail at Firebase. Firebase's abuse
 protections and quotas cover that separate request path.
 
-Future admin mutation or upload routes can reuse `configuredRateLimiter()` with
-the centralized `adminMutation` or `upload` policies and can build identifiers
-from a verified admin UID plus IP. No mutation or upload endpoint is introduced
-in this phase.
+Category mutations reuse `configuredRateLimiter()` with the centralized
+`adminMutation` policy and an identifier made from the verified admin UID plus
+client IP. Future menu and upload routes can reuse the same boundary with their
+appropriate policy.
+
+## Administrator category management
+
+Authenticated administrators can manage every category at `/admin/categories`.
+The page lists active and inactive categories by `sortOrder`, provides one
+shared create/edit form, supports status changes, and requires an explicit
+confirmation before deletion.
+
+Every Server Action independently verifies the revoked Firebase session and
+`admin: true` claim, applies the 30-per-minute Admin mutation limit, and then
+uses the existing category Zod schema. Firebase Admin services receive that
+verified identity and never trust an identity, timestamp, or role from the
+form. Firestore controls `createdAt` and `updatedAt` with server timestamps.
+
+Slug availability is checked by query for compatibility with existing data and
+reserved atomically in the internal `categorySlugs/{slug}` collection to prevent
+simultaneous creates from claiming the same slug. This internal collection is
+covered by the rules' deny-by-default fallback and is never exposed publicly.
+
+Deletion queries `menuItems` for the category inside the transaction. If an
+item exists, deletion stops rather than cascading or leaving an orphaned menu
+item. Menu-item management itself remains deferred to Phase 7.
