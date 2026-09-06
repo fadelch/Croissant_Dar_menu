@@ -1,0 +1,120 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.admin == true;
+    }
+
+    function isValidAdmin(data) {
+      return data.keys().hasAll([
+          'email', 'role', 'createdAt', 'updatedAt'
+        ])
+        && data.keys().hasOnly([
+          'email', 'displayName', 'role', 'createdAt', 'updatedAt'
+        ])
+        && data.email is string
+        && data.email.size() > 0
+        && (!('displayName' in data) || data.displayName is string)
+        && data.role == 'admin'
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp
+        && data.updatedAt >= data.createdAt;
+    }
+
+    function isValidCategory(data) {
+      return data.keys().hasAll([
+          'nameAr', 'slug', 'isActive', 'sortOrder', 'createdAt', 'updatedAt'
+        ])
+        && data.keys().hasOnly([
+          'nameAr', 'nameEn', 'slug', 'descriptionAr', 'descriptionEn',
+          'imageUrl', 'isActive', 'sortOrder', 'createdAt', 'updatedAt'
+        ])
+        && data.nameAr is string
+        && data.nameAr.size() > 0
+        && (!('nameEn' in data) || data.nameEn is string)
+        && data.slug is string
+        && data.slug.size() > 0
+        && (!('descriptionAr' in data) || data.descriptionAr is string)
+        && (!('descriptionEn' in data) || data.descriptionEn is string)
+        && (!('imageUrl' in data) || data.imageUrl is string)
+        && data.isActive is bool
+        && data.sortOrder is int
+        && data.sortOrder >= 0
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp
+        && data.updatedAt >= data.createdAt;
+    }
+
+    function isValidMenuItem(data) {
+      return data.keys().hasAll([
+          'categoryId', 'nameAr', 'price', 'isAvailable', 'isVisible',
+          'isFeatured', 'sortOrder', 'createdAt', 'updatedAt'
+        ])
+        && data.keys().hasOnly([
+          'categoryId', 'nameAr', 'nameEn', 'descriptionAr', 'descriptionEn',
+          'price', 'imageUrl', 'isAvailable', 'isVisible', 'isFeatured',
+          'sortOrder', 'createdAt', 'updatedAt'
+        ])
+        && data.categoryId is string
+        && data.categoryId.size() > 0
+        && data.nameAr is string
+        && data.nameAr.size() > 0
+        && (!('nameEn' in data) || data.nameEn is string)
+        && (!('descriptionAr' in data) || data.descriptionAr is string)
+        && (!('descriptionEn' in data) || data.descriptionEn is string)
+        && data.price is int
+        && data.price >= 0
+        && (!('imageUrl' in data) || data.imageUrl is string)
+        && data.isAvailable is bool
+        && data.isVisible is bool
+        && data.isFeatured is bool
+        && data.sortOrder is int
+        && data.sortOrder >= 0
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp
+        && data.updatedAt >= data.createdAt;
+    }
+
+    match /admins/{uid} {
+      allow read: if isAdmin();
+      allow create: if isAdmin() && isValidAdmin(request.resource.data);
+      allow update: if isAdmin()
+        && isValidAdmin(request.resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'email', 'displayName', 'updatedAt'
+        ]);
+      allow delete: if isAdmin();
+    }
+
+    match /categories/{categoryId} {
+      allow get, list: if isAdmin() || resource.data.isActive == true;
+      allow create: if isAdmin() && isValidCategory(request.resource.data);
+      allow update: if isAdmin()
+        && isValidCategory(request.resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'nameAr', 'nameEn', 'slug', 'descriptionAr', 'descriptionEn',
+          'imageUrl', 'isActive', 'sortOrder', 'updatedAt'
+        ]);
+      allow delete: if isAdmin();
+    }
+
+    match /menuItems/{menuItemId} {
+      allow get, list: if isAdmin() || resource.data.isVisible == true;
+      allow create: if isAdmin() && isValidMenuItem(request.resource.data);
+      allow update: if isAdmin()
+        && isValidMenuItem(request.resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'categoryId', 'nameAr', 'nameEn', 'descriptionAr', 'descriptionEn',
+          'price', 'imageUrl', 'isAvailable', 'isVisible', 'isFeatured',
+          'sortOrder', 'updatedAt'
+        ]);
+      allow delete: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
