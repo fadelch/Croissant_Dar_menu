@@ -1,0 +1,47 @@
+{
+  "Metadata": {
+    "title": "Croissant Dar",
+    "description": "Fresh croissants and warm pastries, made with the comfort of home."
+  },
+  "Brand": {
+    "name": "Croissant Dar",
+    "latinName": "Croissant Dar"
+  },
+  "Navigation": {
+    "primaryLabel": "Primary navigation",
+    "home": "Home",
+    "about": "Our story",
+    "homeLabel": "Croissant Dar homepage",
+    "openingSoon": "Coming soon",
+    "languages": {
+      "ar": "العربية",
+      "en": "English"
+    },
+    "switchTo": "Switch to {language}"
+  },
+  "Home": {
+    "eyebrow": "A new experience, baked with care",
+    "description": "We are preparing a warm space filled with fresh croissants, honest flavors, and thoughtful details that feel like home.",
+    "openingSoon": "Opening soon",
+    "pagePreparing": "The full experience is being prepared",
+    "storyEyebrow": "The spirit of Croissant Dar",
+    "storyTitle": "A simple foundation for a warm experience",
+    "highlights": {
+      "fresh": {
+        "title": "Baked every day",
+        "description": "Prepared fresh each day with care, because the best pastries begin that way."
+      },
+      "home": {
+        "title": "The warmth of home",
+        "description": "Simple, comforting flavors that pair quality ingredients with genuine hospitality."
+      },
+      "moments": {
+        "title": "Better everyday moments",
+        "description": "From the first coffee of the morning to a sweet pause at the end of the day."
+      }
+    }
+  },
+  "Footer": {
+    "comingSoon": "A warm bakery experience — coming soon"
+  }
+}
