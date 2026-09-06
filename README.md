@@ -60,7 +60,7 @@ claim `admin: true`, never the Firestore `role` field.
 
 ## Server-side rate limiting
 
-`POST /api/auth/session` is protected before JSON parsing and Firebase Admin
+`POST /api/auth/login` is protected before JSON parsing and Firebase Admin
 token verification. Its policy is five session-exchange requests per ten
 minutes per client IP. A rejected request receives HTTP `429`, a safe message,
 and `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and

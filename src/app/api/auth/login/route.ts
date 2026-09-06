@@ -52,7 +52,7 @@ export async function POST(request: Request) {
   const rateLimitHeaders = createRateLimitHeaders(rateLimitResult, !rateLimitResult.success);
 
   if (!rateLimitResult.success) {
-    console.warn("Rate limit exceeded for auth session endpoint.");
+    console.warn("Rate limit exceeded for auth login endpoint.");
 
     return NextResponse.json(
       { error: RATE_LIMIT_ERROR },
