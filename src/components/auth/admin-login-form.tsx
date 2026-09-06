@@ -14,6 +14,7 @@ import { adminLoginSchema } from "@/lib/validations/auth";
 
 const GENERIC_LOGIN_ERROR = "Unable to sign in. Check your credentials and try again.";
 const UNAUTHORIZED_ERROR = "You are not authorized to access the admin panel.";
+const RATE_LIMIT_ERROR = "Too many attempts. Please wait a few minutes and try again.";
 
 export function AdminLoginForm() {
   const router = useRouter();
@@ -53,7 +54,14 @@ export function AdminLoginForm() {
       await signOut(auth);
 
       if (!response.ok) {
-        setErrorMessage(response.status === 403 ? UNAUTHORIZED_ERROR : GENERIC_LOGIN_ERROR);
+        if (response.status === 429) {
+          setErrorMessage(RATE_LIMIT_ERROR);
+        } else if (response.status === 403) {
+          setErrorMessage(UNAUTHORIZED_ERROR);
+        } else {
+          setErrorMessage(GENERIC_LOGIN_ERROR);
+        }
+
         return;
       }
 
