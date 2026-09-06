@@ -44,7 +44,7 @@ export function AdminLoginForm() {
         result.data.password,
       );
       const idToken = await credential.user.getIdToken(true);
-      const response = await fetch("/api/auth/session", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "same-origin",
