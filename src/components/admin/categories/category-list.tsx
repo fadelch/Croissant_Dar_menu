@@ -6,7 +6,7 @@ type CategoryListProps = {
 };
 
 function categoryDisplayName(category: AdminCategory): string {
-  return category.nameEn ?? category.nameAr;
+  return category.nameEn;
 }
 
 export function CategoryList({ categories }: CategoryListProps) {
@@ -25,8 +25,8 @@ export function CategoryList({ categories }: CategoryListProps) {
         <table className="w-full border-collapse text-left">
           <thead className="bg-brown-900 text-sm text-cream-50">
             <tr>
-              <th scope="col" className="px-5 py-4">Arabic Name</th>
               <th scope="col" className="px-5 py-4">English Name</th>
+              <th scope="col" className="px-5 py-4">Arabic Name</th>
               <th scope="col" className="px-5 py-4">Slug</th>
               <th scope="col" className="px-5 py-4">Active</th>
               <th scope="col" className="px-5 py-4">Order</th>
@@ -36,8 +36,8 @@ export function CategoryList({ categories }: CategoryListProps) {
           <tbody className="divide-y divide-brown-900/10 bg-white">
             {categories.map((category) => (
               <tr key={category.id} className="align-top">
-                <td className="px-5 py-5 font-bold text-brown-900" dir="rtl">{category.nameAr}</td>
-                <td className="px-5 py-5 text-brown-700">{category.nameEn ?? "—"}</td>
+                <td className="px-5 py-5 font-bold text-brown-900">{category.nameEn}</td>
+                <td className="px-5 py-5 text-brown-700" dir="rtl">{category.nameAr ?? "—"}</td>
                 <td className="px-5 py-5 font-mono text-sm text-brown-700">{category.slug}</td>
                 <td className="px-5 py-5">
                   <span className={`rounded-full px-3 py-1 text-xs font-bold ${category.isActive ? "bg-green-50 text-green-800" : "bg-stone-100 text-stone-700"}`}>
@@ -63,8 +63,10 @@ export function CategoryList({ categories }: CategoryListProps) {
           <article key={category.id} className="rounded-3xl border border-brown-900/10 bg-white p-5 shadow-sm">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h3 className="font-black text-brown-900" dir="rtl">{category.nameAr}</h3>
-                <p className="mt-1 text-sm text-brown-700">{category.nameEn ?? "No English name"}</p>
+                <h3 className="font-black text-brown-900">{category.nameEn}</h3>
+                <p className="mt-1 text-sm text-brown-700" dir="rtl">
+                  {category.nameAr ?? "No Arabic name"}
+                </p>
               </div>
               <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold ${category.isActive ? "bg-green-50 text-green-800" : "bg-stone-100 text-stone-700"}`}>
                 {category.isActive ? "Active" : "Inactive"}

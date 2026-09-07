@@ -8,3 +8,4 @@ export { createRateLimitHeaders, RateLimitUnavailableError } from "@/lib/rate-li
 
 export const authSessionLimiter = configuredRateLimiter(RATE_LIMIT_POLICIES.authSession);
 export const adminMutationLimiter = configuredRateLimiter(RATE_LIMIT_POLICIES.adminMutation);
+export const uploadLimiter = configuredRateLimiter(RATE_LIMIT_POLICIES.upload);

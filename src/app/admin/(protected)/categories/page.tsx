@@ -61,7 +61,7 @@ export default async function AdminCategoriesPage({ searchParams }: AdminCategor
           Add Category
         </h2>
         <p className="mt-2 text-sm leading-6 text-brown-700">
-          Arabic name, slug, and display order are required. Other fields are optional.
+          English name, slug, and display order are required. Arabic fields are optional.
         </p>
         <div className="mt-7">
           <CategoryForm mode="create" />

@@ -51,8 +51,8 @@ function formDataToCategoryInput(formData: FormData): Record<string, unknown> {
   const sortOrder = formData.get("sortOrder");
 
   return {
-    nameAr: formData.get("nameAr"),
-    nameEn: optionalText(formData.get("nameEn")),
+    nameEn: formData.get("nameEn"),
+    nameAr: optionalText(formData.get("nameAr")),
     slug: formData.get("slug"),
     descriptionAr: optionalText(formData.get("descriptionAr")),
     descriptionEn: optionalText(formData.get("descriptionEn")),

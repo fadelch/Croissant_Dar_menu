@@ -1,6 +1,6 @@
 export const categoryFormFields = [
-  "nameAr",
   "nameEn",
+  "nameAr",
   "slug",
   "descriptionAr",
   "descriptionEn",

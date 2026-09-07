@@ -6,8 +6,8 @@ import type { CategoryDocument, CreateCategoryInput, UpdateCategoryInput } from 
 export const categoryIdSchema = z.string().trim().min(1).max(1_500).regex(/^[^/]+$/);
 
 const categoryInputShape = {
-  nameAr: z.string().trim().min(1).max(120),
-  nameEn: z.string().trim().min(1).max(120).optional(),
+  nameEn: z.string().trim().min(1).max(120),
+  nameAr: z.string().trim().min(1).max(120).optional(),
   slug: z
     .string()
     .trim()
