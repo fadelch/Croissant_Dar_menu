@@ -2,8 +2,8 @@ import type { Timestamp } from "firebase/firestore";
 
 export type Category = {
   id: string;
-  nameAr: string;
-  nameEn?: string;
+  nameEn: string;
+  nameAr?: string;
   slug: string;
   descriptionAr?: string;
   descriptionEn?: string;

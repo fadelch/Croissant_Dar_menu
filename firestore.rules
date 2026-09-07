@@ -25,15 +25,17 @@ service cloud.firestore {
 
     function isValidCategory(data) {
       return data.keys().hasAll([
-          'nameAr', 'slug', 'isActive', 'sortOrder', 'createdAt', 'updatedAt'
+          'nameEn', 'slug', 'isActive', 'sortOrder', 'createdAt', 'updatedAt'
         ])
         && data.keys().hasOnly([
           'nameAr', 'nameEn', 'slug', 'descriptionAr', 'descriptionEn',
           'imageUrl', 'isActive', 'sortOrder', 'createdAt', 'updatedAt'
         ])
-        && data.nameAr is string
-        && data.nameAr.size() > 0
-        && (!('nameEn' in data) || data.nameEn is string)
+        && data.nameEn is string
+        && data.nameEn.size() > 0
+        && (!('nameAr' in data) || (
+          data.nameAr is string && data.nameAr.size() > 0
+        ))
         && data.slug is string
         && data.slug.size() > 0
         && (!('descriptionAr' in data) || data.descriptionAr is string)

@@ -126,3 +126,11 @@ covered by the rules' deny-by-default fallback and is never exposed publicly.
 Deletion queries `menuItems` for the category inside the transaction. If an
 item exists, deletion stops rather than cascading or leaving an orphaned menu
 item. Menu-item management itself remains deferred to Phase 7.
+
+English is the required primary language for category names. Arabic names and
+both descriptions are optional. Category images are selected from the admin's
+computer and uploaded through the protected `/api/admin/category-images`
+endpoint. The browser and server both enforce a 2 MB maximum, and the server
+accepts only valid JPEG, PNG, or WebP content. Uploads use the existing
+10-per-ten-minutes admin upload limiter and Firebase Admin Storage; direct
+browser writes to Firebase Storage remain denied.
