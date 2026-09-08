@@ -89,6 +89,9 @@ export function SiteHeader() {
                 unitPrice: checkout("unitPrice"),
                 lineTotal: checkout("lineTotal"),
                 total: checkout("total"),
+                continueOnWhatsApp: checkout("continueOnWhatsApp"),
+                opensNewWindow: checkout("opensNewWindow"),
+                whatsappUnavailable: checkout("whatsappUnavailable"),
                 validation: {
                   firstNameRequired: checkout("validation.firstNameRequired"),
                   firstNameTooLong: checkout("validation.firstNameTooLong"),

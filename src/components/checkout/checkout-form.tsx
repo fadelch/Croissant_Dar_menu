@@ -36,6 +36,9 @@ export type CheckoutLabels = {
   unitPrice: string;
   lineTotal: string;
   total: string;
+  continueOnWhatsApp: string;
+  opensNewWindow: string;
+  whatsappUnavailable: string;
   validation: CheckoutValidationMessages;
 };
 

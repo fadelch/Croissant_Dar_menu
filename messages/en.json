@@ -63,6 +63,9 @@
     "unitPrice": "Unit price:",
     "lineTotal": "Line total",
     "total": "Total",
+    "continueOnWhatsApp": "Continue on WhatsApp",
+    "opensNewWindow": "Opens WhatsApp in a new window.",
+    "whatsappUnavailable": "WhatsApp ordering is temporarily unavailable.",
     "validation": {
       "firstNameRequired": "First Name is required.",
       "firstNameTooLong": "First Name must be 80 characters or fewer.",
