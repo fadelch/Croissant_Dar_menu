@@ -63,6 +63,9 @@
     "unitPrice": "سعر القطعة:",
     "lineTotal": "مجموع الصنف",
     "total": "المجموع",
+    "continueOnWhatsApp": "المتابعة عبر واتساب",
+    "opensNewWindow": "يفتح واتساب في نافذة جديدة.",
+    "whatsappUnavailable": "الطلب عبر واتساب غير متاح مؤقتًا.",
     "validation": {
       "firstNameRequired": "الاسم الأول مطلوب.",
       "firstNameTooLong": "يجب ألا يتجاوز الاسم الأول 80 حرفًا.",

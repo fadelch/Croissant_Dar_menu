@@ -9,6 +9,7 @@ import {
   CheckoutForm,
   type CheckoutLabels,
 } from "@/components/checkout/checkout-form";
+import { ContinueOnWhatsApp } from "@/components/checkout/continue-on-whatsapp";
 import { OrderSummary } from "@/components/checkout/order-summary";
 import type { CheckoutDetails } from "@/lib/checkout/types";
 import { formatLBP } from "@/lib/formatters/currency";
@@ -191,13 +192,24 @@ export function CartPanel({ locale, labels, onClose }: CartPanelProps) {
               />
 
               {validatedDetails ? (
-                <OrderSummary
-                  details={validatedDetails}
-                  items={items}
-                  totalPrice={totalPrice}
-                  locale={locale}
-                  labels={labels.checkout}
-                />
+                <>
+                  <OrderSummary
+                    details={validatedDetails}
+                    items={items}
+                    totalPrice={totalPrice}
+                    locale={locale}
+                    labels={labels.checkout}
+                  />
+                  <ContinueOnWhatsApp
+                    checkoutDetails={validatedDetails}
+                    cartItems={items}
+                    totalPrice={totalPrice}
+                    locale={locale}
+                    label={labels.checkout.continueOnWhatsApp}
+                    opensNewWindowLabel={labels.checkout.opensNewWindow}
+                    unavailableLabel={labels.checkout.whatsappUnavailable}
+                  />
+                </>
               ) : null}
             </>
           )}
