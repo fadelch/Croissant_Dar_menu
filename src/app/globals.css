@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @source "../components/cart";
+@source "../components/checkout";
 
 @theme inline {
   --color-cream-50: #fffaf0;
