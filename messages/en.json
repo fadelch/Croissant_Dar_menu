@@ -1,18 +1,22 @@
 {
   "Metadata": {
     "title": "Croissant Dar",
-    "description": "Fresh croissants and warm pastries, made with the comfort of home."
+    "description": "A bold, modern croissant experience made for serious cravings."
   },
   "Brand": {
     "name": "Croissant Dar",
-    "latinName": "Croissant Dar"
+    "secondaryName": "كروسان الدار"
   },
   "Navigation": {
     "primaryLabel": "Primary navigation",
+    "mobileLabel": "Mobile navigation",
     "home": "Home",
+    "menu": "Menu",
     "about": "Our story",
-    "homeLabel": "Croissant Dar homepage",
-    "openingSoon": "Coming soon",
+    "contact": "Contact",
+    "homeLabel": "Go to the Croissant Dar homepage",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
     "languages": {
       "ar": "العربية",
       "en": "English"
@@ -20,28 +24,91 @@
     "switchTo": "Switch to {language}"
   },
   "Home": {
-    "eyebrow": "A new experience, baked with care",
-    "description": "We are preparing a warm space filled with fresh croissants, honest flavors, and thoughtful details that feel like home.",
-    "openingSoon": "Opening soon",
-    "pagePreparing": "The full experience is being prepared",
-    "storyEyebrow": "The spirit of Croissant Dar",
-    "storyTitle": "A simple foundation for a warm experience",
-    "highlights": {
-      "fresh": {
-        "title": "Baked every day",
-        "description": "Prepared fresh each day with care, because the best pastries begin that way."
-      },
-      "home": {
-        "title": "The warmth of home",
-        "description": "Simple, comforting flavors that pair quality ingredients with genuine hospitality."
-      },
-      "moments": {
-        "title": "Better everyday moments",
-        "description": "From the first coffee of the morning to a sweet pause at the end of the day."
+    "hero": {
+      "eyebrow": "Croissant, reimagined",
+      "titleLead": "Not just a croissant.",
+      "titleAccent": "A whole new craving.",
+      "description": "Golden layers meet bold combinations in a food experience built around the unmistakable character of the croissant.",
+      "menuCta": "Explore the menu",
+      "storyCta": "Our story",
+      "scroll": "Discover Croissant Dar",
+      "visualEyebrow": "The hero stage",
+      "visualPlaceholder": "Reserved for the real Croissant Dar film and food imagery.",
+      "visualAccessibleLabel": "A warm abstract Croissant Dar media placeholder, reserved for genuine brand imagery"
+    },
+    "introduction": {
+      "eyebrow": "The idea",
+      "title": "The familiar, made impossible to ignore.",
+      "description": "Croissant Dar takes the croissant beyond the pastry counter—pairing its crisp, flaky character with combinations designed for a bigger kind of craving.",
+      "details": {
+        "layers": {
+          "title": "The layers",
+          "description": "That unmistakable contrast between a delicate exterior and a rich center."
+        },
+        "fillings": {
+          "title": "The combinations",
+          "description": "A familiar shape becomes a new canvas for savory and sweet directions."
+        },
+        "craving": {
+          "title": "The craving",
+          "description": "Comforting enough to know, bold enough to want again."
+        }
       }
+    },
+    "menu": {
+      "eyebrow": "The menu",
+      "title": "Built for every kind of craving.",
+      "description": "This space is ready for the real Croissant Dar categories and products arriving in the next phase.",
+      "categoryArea": {
+        "eyebrow": "Category area",
+        "title": "Find your direction",
+        "description": "Future categories will make it easy to move between the different sides of the Croissant Dar menu."
+      },
+      "productArea": {
+        "eyebrow": "Product area",
+        "title": "The full selection belongs here",
+        "description": "Real names, images, availability, and prices will come directly from the existing Firestore menu foundation in Phase 9."
+      }
+    },
+    "featured": {
+      "eyebrow": "The spotlight",
+      "title": "Some cravings deserve center stage.",
+      "description": "A dedicated presentation area is ready for featured Croissant Dar products without inventing items or connecting public data too early.",
+      "visualText": "The next favorite lands here.",
+      "phaseNote": "Presentation now. Genuine Croissant Dar products and imagery in the next menu phase."
+    },
+    "story": {
+      "eyebrow": "Why Croissant Dar",
+      "title": "A classic shape with a bolder appetite.",
+      "description": "The croissant already knows how to turn simple layers into something memorable. Croissant Dar builds on that character with a contemporary, craving-first point of view.",
+      "values": {
+        "familiar": {
+          "title": "Familiar at first glance",
+          "description": "The comfort and character of the croissant remain at the center."
+        },
+        "bold": {
+          "title": "Unexpected in direction",
+          "description": "A pastry format with room for a more expressive food experience."
+        },
+        "balanced": {
+          "title": "Made to feel complete",
+          "description": "Crisp, rich, and satisfying—without unnecessary complication."
+        }
+      }
+    },
+    "cta": {
+      "eyebrow": "Your next craving",
+      "title": "Ready to see what Croissant Dar becomes?",
+      "description": "Explore the menu preview today. The real collection and ordering experience will arrive in the phases ahead.",
+      "button": "Explore the menu"
     }
   },
   "Footer": {
-    "comingSoon": "A warm bakery experience — coming soon"
+    "tagline": "Croissant-based food with a warm, bold point of view.",
+    "navigationLabel": "Footer navigation",
+    "explore": "Explore",
+    "language": "Language",
+    "copyright": "© {year} Croissant Dar",
+    "phaseNote": "The full menu experience is being prepared."
   }
 }
