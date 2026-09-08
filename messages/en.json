@@ -58,24 +58,34 @@
     "menu": {
       "eyebrow": "The menu",
       "title": "Built for every kind of craving.",
-      "description": "This space is ready for the real Croissant Dar categories and products arriving in the next phase.",
-      "categoryArea": {
-        "eyebrow": "Category area",
-        "title": "Find your direction",
-        "description": "Future categories will make it easy to move between the different sides of the Croissant Dar menu."
+      "description": "Explore the current Croissant Dar selection and choose the category that matches your craving.",
+      "all": "All",
+      "filterLabel": "Filter menu by category",
+      "unavailable": "Unavailable",
+      "noImage": "No product image",
+      "empty": {
+        "title": "The menu is being prepared.",
+        "description": "There are no menu items to show right now. Please check back soon."
       },
-      "productArea": {
-        "eyebrow": "Product area",
-        "title": "The full selection belongs here",
-        "description": "Real names, images, availability, and prices will come directly from the existing Firestore menu foundation in Phase 9."
+      "error": {
+        "title": "The menu is taking a moment.",
+        "description": "We could not load the selection right now. Please try again shortly."
       }
     },
     "featured": {
       "eyebrow": "The spotlight",
       "title": "Some cravings deserve center stage.",
-      "description": "A dedicated presentation area is ready for featured Croissant Dar products without inventing items or connecting public data too early.",
-      "visualText": "The next favorite lands here.",
-      "phaseNote": "Presentation now. Genuine Croissant Dar products and imagery in the next menu phase."
+      "description": "A focused look at the Croissant Dar items currently in the spotlight.",
+      "unavailable": "Unavailable",
+      "noImage": "No product image",
+      "empty": {
+        "title": "The next favorite lands here.",
+        "description": "There are no featured items right now. Explore the full menu above."
+      },
+      "error": {
+        "title": "The spotlight is taking a moment.",
+        "description": "We could not load the featured selection right now. Please try again shortly."
+      }
     },
     "story": {
       "eyebrow": "Why Croissant Dar",
@@ -99,7 +109,7 @@
     "cta": {
       "eyebrow": "Your next craving",
       "title": "Ready to see what Croissant Dar becomes?",
-      "description": "Explore the menu preview today. The real collection and ordering experience will arrive in the phases ahead.",
+      "description": "Browse the current selection and find the direction that matches your next craving.",
       "button": "Explore the menu"
     }
   },
@@ -109,6 +119,6 @@
     "explore": "Explore",
     "language": "Language",
     "copyright": "© {year} Croissant Dar",
-    "phaseNote": "The full menu experience is being prepared."
+    "phaseNote": "Explore the current Croissant Dar menu above."
   }
 }
