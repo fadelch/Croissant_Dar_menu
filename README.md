@@ -16,9 +16,8 @@ preference cookie without creating `/en` and `/ar` pages.
 
 Copy `.env.example` to `.env.local` and provide the Firebase client values. Add
 the Firebase Admin values only when future server-side features need them.
-Administrator authentication is documented below. Public menu display,
-menu-item management, cart, and ordering behavior remain deferred to later
-phases.
+Administrator authentication is documented below. Public menu display, cart,
+and ordering behavior remain deferred to later phases.
 
 ## Firestore foundation
 
@@ -102,8 +101,8 @@ protections and quotas cover that separate request path.
 
 Category mutations reuse `configuredRateLimiter()` with the centralized
 `adminMutation` policy and an identifier made from the verified admin UID plus
-client IP. Future menu and upload routes can reuse the same boundary with their
-appropriate policy.
+client IP. Menu mutations use the same policy, while optional product images
+also use the centralized upload policy.
 
 ## Administrator category management
 
@@ -134,3 +133,24 @@ endpoint. The browser and server both enforce a 2 MB maximum, and the server
 accepts only valid JPEG, PNG, or WebP content. Uploads use the existing
 10-per-ten-minutes admin upload limiter and Firebase Admin Storage; direct
 browser writes to Firebase Storage remain denied.
+
+## Administrator menu management
+
+Authenticated administrators can manage all products at `/admin/menu`. The
+page loads the menu and category collection once each, joins category labels in
+memory, and sorts by `sortOrder` with document ID as the deterministic tie
+breaker. Integer prices remain stored as raw Lebanese Pound amounts and are
+displayed through `formatLBP()`.
+
+Every menu mutation independently verifies the Admin session, applies the
+shared mutation limiter, normalizes HTML strings and checkboxes, reuses the
+existing Menu Item Zod schema, and verifies the selected category on the
+server. Availability, visibility, and featured status remain independent.
+
+Product images are optional JPEG, PNG, or WebP files up to 2 MB. They use
+server-controlled `menu-items/{menuItemId}/{generated-id}` Storage paths and an
+optional internal `imageStoragePath` document field. Replacement uploads the
+new image before updating Firestore and removes the old owned object only after
+the new reference is safe. Removing an image or deleting an item cleans up only
+its validated owned image path. Public menu, cart, checkout, and WhatsApp
+features are not implemented in this phase.

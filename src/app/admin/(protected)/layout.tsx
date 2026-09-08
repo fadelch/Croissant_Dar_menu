@@ -23,6 +23,7 @@ export default async function ProtectedAdminLayout({ children }: ProtectedAdminL
             <nav aria-label="Admin navigation" className="flex items-center gap-4 text-sm font-bold text-brown-700">
               <Link href="/admin" className="transition hover:text-caramel-500">Dashboard</Link>
               <Link href="/admin/categories" className="transition hover:text-caramel-500">Categories</Link>
+              <Link href="/admin/menu" className="transition hover:text-caramel-500">Menu</Link>
             </nav>
           </div>
           <LogoutButton />

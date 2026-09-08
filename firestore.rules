@@ -56,7 +56,7 @@ service cloud.firestore {
         ])
         && data.keys().hasOnly([
           'categoryId', 'nameAr', 'nameEn', 'descriptionAr', 'descriptionEn',
-          'price', 'imageUrl', 'isAvailable', 'isVisible', 'isFeatured',
+          'price', 'imageUrl', 'imageStoragePath', 'isAvailable', 'isVisible', 'isFeatured',
           'sortOrder', 'createdAt', 'updatedAt'
         ])
         && data.categoryId is string
@@ -69,6 +69,7 @@ service cloud.firestore {
         && data.price is int
         && data.price >= 0
         && (!('imageUrl' in data) || data.imageUrl is string)
+        && (!('imageStoragePath' in data) || data.imageStoragePath is string)
         && data.isAvailable is bool
         && data.isVisible is bool
         && data.isFeatured is bool
@@ -109,7 +110,7 @@ service cloud.firestore {
         && isValidMenuItem(request.resource.data)
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
           'categoryId', 'nameAr', 'nameEn', 'descriptionAr', 'descriptionEn',
-          'price', 'imageUrl', 'isAvailable', 'isVisible', 'isFeatured',
+          'price', 'imageUrl', 'imageStoragePath', 'isAvailable', 'isVisible', 'isFeatured',
           'sortOrder', 'updatedAt'
         ]);
       allow delete: if isAdmin();

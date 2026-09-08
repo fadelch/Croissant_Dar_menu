@@ -9,6 +9,7 @@ export type MenuItem = {
   descriptionEn?: string;
   price: number;
   imageUrl?: string;
+  imageStoragePath?: string;
   isAvailable: boolean;
   isVisible: boolean;
   isFeatured: boolean;
