@@ -9,10 +9,12 @@
   --color-brown-900: #39271f;
   --color-charcoal-950: #211e1b;
   --font-sans: var(--font-arabic);
+  --font-display: var(--font-brand-display);
 }
 
 :root {
   --font-arabic: Tahoma, Arial, "Noto Sans Arabic", sans-serif;
+  --font-brand-display: Georgia, "Times New Roman", Tahoma, serif;
   color-scheme: light;
 }
 
@@ -34,4 +36,17 @@ body {
 ::selection {
   background: #c98545;
   color: #fffaf0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
