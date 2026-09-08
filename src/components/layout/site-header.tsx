@@ -1,6 +1,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
+import { CartButton } from "@/components/cart/cart-button";
 import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { MobileNavigation } from "@/components/site/mobile-navigation";
 import { BrandMark } from "@/components/ui/brand-mark";
@@ -10,6 +11,7 @@ import { getAlternateLocale } from "@/i18n/routing";
 export function SiteHeader() {
   const locale = useLocale();
   const t = useTranslations("Navigation");
+  const cart = useTranslations("Cart");
   const targetLocale = getAlternateLocale(locale);
   const targetLanguage = t(`languages.${targetLocale}`);
   const links = [
@@ -47,6 +49,26 @@ export function SiteHeader() {
             targetLocale={targetLocale}
             label={targetLanguage}
             accessibleLabel={t("switchTo", { language: targetLanguage })}
+          />
+          <CartButton
+            locale={locale}
+            label={cart("open")}
+            quantityLabel={cart.raw("quantityLabel") as string}
+            panelLabels={{
+              title: cart("title"),
+              close: cart("close"),
+              loading: cart("loading"),
+              empty: cart("empty"),
+              emptyDescription: cart("emptyDescription"),
+              unitPrice: cart("unitPrice"),
+              lineTotal: cart("lineTotal"),
+              quantity: cart("quantity"),
+              increase: cart("increase"),
+              decrease: cart("decrease"),
+              remove: cart("remove"),
+              clear: cart("clear"),
+              total: cart("total"),
+            }}
           />
           <MobileNavigation
             links={links}

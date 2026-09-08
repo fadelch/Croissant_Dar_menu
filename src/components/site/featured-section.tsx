@@ -11,6 +11,7 @@ type FeaturedSectionProps = {
 
 export function FeaturedSection({ items, status }: FeaturedSectionProps) {
   const t = useTranslations("Home.featured");
+  const cart = useTranslations("Cart");
 
   return (
     <section aria-labelledby="featured-heading" className="overflow-hidden bg-charcoal-950 py-20 text-cream-50 sm:py-28">
@@ -35,6 +36,9 @@ export function FeaturedSection({ items, status }: FeaturedSectionProps) {
                   item={item}
                   unavailableLabel={t("unavailable")}
                   noImageLabel={t("noImage")}
+                  addToCartLabel={cart("add")}
+                  addedLabel={cart("added")}
+                  maximumLabel={cart("maximumReached")}
                 />
               </li>
             ))}

@@ -23,6 +23,26 @@
     },
     "switchTo": "التبديل إلى {language}"
   },
+  "Cart": {
+    "open": "فتح السلة",
+    "quantityLabel": "{quantity} منتجات في السلة",
+    "title": "سلّتك",
+    "close": "إغلاق السلة",
+    "loading": "عم نحمّل سلّتك…",
+    "add": "أضف إلى السلة",
+    "added": "تمت الإضافة",
+    "maximumReached": "وصلت للحد الأقصى",
+    "empty": "سلّتك فاضية.",
+    "emptyDescription": "أضف صنف متوفر من القائمة لتبلّش.",
+    "unitPrice": "سعر القطعة:",
+    "lineTotal": "مجموع الصنف",
+    "quantity": "الكمية",
+    "increase": "زيادة الكمية",
+    "decrease": "تقليل الكمية",
+    "remove": "إزالة",
+    "clear": "إفراغ السلة",
+    "total": "المجموع"
+  },
   "Home": {
     "hero": {
       "eyebrow": "الكروسان بحلّة جديدة",

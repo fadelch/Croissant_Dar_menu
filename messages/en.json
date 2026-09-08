@@ -23,6 +23,26 @@
     },
     "switchTo": "Switch to {language}"
   },
+  "Cart": {
+    "open": "Open cart",
+    "quantityLabel": "{quantity} products in cart",
+    "title": "Your cart",
+    "close": "Close cart",
+    "loading": "Loading your cart…",
+    "add": "Add to cart",
+    "added": "Added",
+    "maximumReached": "Maximum reached",
+    "empty": "Your cart is empty.",
+    "emptyDescription": "Add an available item from the menu to get started.",
+    "unitPrice": "Unit price:",
+    "lineTotal": "Line total",
+    "quantity": "Quantity",
+    "increase": "Increase quantity",
+    "decrease": "Decrease quantity",
+    "remove": "Remove",
+    "clear": "Clear cart",
+    "total": "Total"
+  },
   "Home": {
     "hero": {
       "eyebrow": "Croissant, reimagined",
