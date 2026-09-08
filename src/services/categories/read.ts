@@ -13,5 +13,19 @@ export async function getActiveCategories(): Promise<Category[]> {
   );
   const snapshot = await getDocs(categoriesQuery);
 
-  return snapshot.docs.map(toCategory);
+  const categories = snapshot.docs.flatMap((document) => {
+    try {
+      return [toCategory(document)];
+    } catch {
+      console.warn("Skipped an invalid public category document.");
+      return [];
+    }
+  });
+
+  return categories.sort(
+    (first, second) =>
+      first.sortOrder - second.sortOrder ||
+      first.slug.localeCompare(second.slug) ||
+      first.id.localeCompare(second.id),
+  );
 }

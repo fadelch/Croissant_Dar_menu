@@ -8,6 +8,24 @@ import type { MenuItem } from "@/types/menu";
 
 const menuItemsCollection = () => collection(db, FIRESTORE_COLLECTIONS.menuItems);
 
+function toValidMenuItems(
+  documents: Parameters<typeof toMenuItem>[0][],
+): MenuItem[] {
+  const items = documents.flatMap((document) => {
+    try {
+      return [toMenuItem(document)];
+    } catch {
+      console.warn("Skipped an invalid public menu item document.");
+      return [];
+    }
+  });
+
+  return items.sort(
+    (first, second) =>
+      first.sortOrder - second.sortOrder || first.id.localeCompare(second.id),
+  );
+}
+
 export async function getVisibleMenuItems(): Promise<MenuItem[]> {
   const menuItemsQuery = query(
     menuItemsCollection(),
@@ -16,7 +34,7 @@ export async function getVisibleMenuItems(): Promise<MenuItem[]> {
   );
   const snapshot = await getDocs(menuItemsQuery);
 
-  return snapshot.docs.map(toMenuItem);
+  return toValidMenuItems(snapshot.docs);
 }
 
 export async function getVisibleMenuItemsByCategory(categoryId: string): Promise<MenuItem[]> {
@@ -29,7 +47,7 @@ export async function getVisibleMenuItemsByCategory(categoryId: string): Promise
   );
   const snapshot = await getDocs(menuItemsQuery);
 
-  return snapshot.docs.map(toMenuItem);
+  return toValidMenuItems(snapshot.docs);
 }
 
 export async function getFeaturedMenuItems(): Promise<MenuItem[]> {
@@ -41,5 +59,5 @@ export async function getFeaturedMenuItems(): Promise<MenuItem[]> {
   );
   const snapshot = await getDocs(menuItemsQuery);
 
-  return snapshot.docs.map(toMenuItem);
+  return toValidMenuItems(snapshot.docs);
 }
