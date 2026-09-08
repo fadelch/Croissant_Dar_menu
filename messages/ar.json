@@ -43,6 +43,37 @@
     "clear": "إفراغ السلة",
     "total": "المجموع"
   },
+  "Checkout": {
+    "customerDetails": "معلومات الزبون",
+    "detailsDescription": "أدخل معلوماتك، واختر طريقة استلام الطلب، ثم راجع كل التفاصيل أدناه.",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "phone": "رقم الهاتف",
+    "orderType": "نوع الطلب",
+    "dineIn": "تناول في المطعم",
+    "pickup": "استلام",
+    "delivery": "توصيل",
+    "note": "ملاحظة على الطلب",
+    "optional": "اختياري",
+    "reviewOrder": "مراجعة الطلب",
+    "reviewHeading": "مراجعة الطلب",
+    "reviewDescription": "تم التحقق من هذه التفاصيل وهي جاهزة للخطوة التالية. لم يتم إرسال طلبك بعد.",
+    "customer": "الزبون",
+    "items": "الأصناف",
+    "unitPrice": "سعر القطعة:",
+    "lineTotal": "مجموع الصنف",
+    "total": "المجموع",
+    "validation": {
+      "firstNameRequired": "الاسم الأول مطلوب.",
+      "firstNameTooLong": "يجب ألا يتجاوز الاسم الأول 80 حرفًا.",
+      "lastNameRequired": "اسم العائلة مطلوب.",
+      "lastNameTooLong": "يجب ألا يتجاوز اسم العائلة 80 حرفًا.",
+      "phoneRequired": "رقم الهاتف مطلوب.",
+      "phoneInvalid": "أدخل رقم هاتف صحيحًا باستخدام الأرقام أو المسافات أو + أو -.",
+      "orderTypeRequired": "اختر نوع الطلب.",
+      "noteTooLong": "يجب ألا تتجاوز ملاحظة الطلب 500 حرف."
+    }
+  },
   "Home": {
     "hero": {
       "eyebrow": "الكروسان بحلّة جديدة",

@@ -12,6 +12,7 @@ export function SiteHeader() {
   const locale = useLocale();
   const t = useTranslations("Navigation");
   const cart = useTranslations("Cart");
+  const checkout = useTranslations("Checkout");
   const targetLocale = getAlternateLocale(locale);
   const targetLanguage = t(`languages.${targetLocale}`);
   const links = [
@@ -68,6 +69,37 @@ export function SiteHeader() {
               remove: cart("remove"),
               clear: cart("clear"),
               total: cart("total"),
+              checkout: {
+                customerDetails: checkout("customerDetails"),
+                detailsDescription: checkout("detailsDescription"),
+                firstName: checkout("firstName"),
+                lastName: checkout("lastName"),
+                phone: checkout("phone"),
+                orderType: checkout("orderType"),
+                dineIn: checkout("dineIn"),
+                pickup: checkout("pickup"),
+                delivery: checkout("delivery"),
+                note: checkout("note"),
+                optional: checkout("optional"),
+                reviewOrder: checkout("reviewOrder"),
+                reviewHeading: checkout("reviewHeading"),
+                reviewDescription: checkout("reviewDescription"),
+                customer: checkout("customer"),
+                items: checkout("items"),
+                unitPrice: checkout("unitPrice"),
+                lineTotal: checkout("lineTotal"),
+                total: checkout("total"),
+                validation: {
+                  firstNameRequired: checkout("validation.firstNameRequired"),
+                  firstNameTooLong: checkout("validation.firstNameTooLong"),
+                  lastNameRequired: checkout("validation.lastNameRequired"),
+                  lastNameTooLong: checkout("validation.lastNameTooLong"),
+                  phoneRequired: checkout("validation.phoneRequired"),
+                  phoneInvalid: checkout("validation.phoneInvalid"),
+                  orderTypeRequired: checkout("validation.orderTypeRequired"),
+                  noteTooLong: checkout("validation.noteTooLong"),
+                },
+              },
             }}
           />
           <MobileNavigation

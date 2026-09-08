@@ -113,7 +113,7 @@ export function CartItemRow({
         type="button"
         onClick={onRemove}
         aria-label={`${removeLabel}: ${name}`}
-        className="mt-4 min-h-11 text-sm font-bold text-brown-700 underline decoration-brown-900/30 underline-offset-4 transition-colors hover:text-caramel-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500"
+        className="mt-4 min-h-11 min-w-11 text-sm font-bold text-brown-700 underline decoration-brown-900/30 underline-offset-4 transition-colors hover:text-caramel-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500"
       >
         {removeLabel}
       </button>

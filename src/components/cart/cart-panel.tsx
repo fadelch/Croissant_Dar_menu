@@ -1,10 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { CartItemRow } from "@/components/cart/cart-item";
 import { useCart } from "@/components/cart/cart-provider";
+import {
+  CheckoutForm,
+  type CheckoutLabels,
+} from "@/components/checkout/checkout-form";
+import { OrderSummary } from "@/components/checkout/order-summary";
+import type { CheckoutDetails } from "@/lib/checkout/types";
 import { formatLBP } from "@/lib/formatters/currency";
 import type { Locale } from "@/i18n/routing";
 
@@ -22,6 +28,7 @@ export type CartPanelLabels = {
   remove: string;
   clear: string;
   total: string;
+  checkout: CheckoutLabels;
 };
 
 type CartPanelProps = {
@@ -42,6 +49,7 @@ export function CartPanel({ locale, labels, onClose }: CartPanelProps) {
   } = useCart();
   const dialogRef = useRef<HTMLElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [validatedDetails, setValidatedDetails] = useState<CheckoutDetails | null>(null);
 
   useEffect(() => {
     const previouslyFocusedElement = document.activeElement;
@@ -141,44 +149,59 @@ export function CartPanel({ locale, labels, onClose }: CartPanelProps) {
               </div>
             </div>
           ) : (
-            <ul>
-              {items.map((item) => (
-                <CartItemRow
-                  key={item.id}
-                  item={item}
+            <>
+              <ul>
+                {items.map((item) => (
+                  <CartItemRow
+                    key={item.id}
+                    item={item}
+                    locale={locale}
+                    unitPriceLabel={labels.unitPrice}
+                    lineTotalLabel={labels.lineTotal}
+                    quantityLabel={labels.quantity}
+                    increaseLabel={labels.increase}
+                    decreaseLabel={labels.decrease}
+                    removeLabel={labels.remove}
+                    onIncrement={() => incrementItem(item.id)}
+                    onDecrement={() => decrementItem(item.id)}
+                    onRemove={() => removeItem(item.id)}
+                  />
+                ))}
+              </ul>
+
+              <section className="border-t border-brown-900/12 pt-5" aria-label={labels.total}>
+                <div className="flex items-end justify-between gap-4">
+                  <p className="font-black">{labels.total}</p>
+                  <p className="whitespace-nowrap text-xl font-black text-caramel-500" dir="ltr">
+                    {formatLBP(totalPrice)}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={clearCart}
+                  className="mt-4 min-h-11 min-w-11 text-sm font-bold text-brown-700 underline decoration-brown-900/30 underline-offset-4 transition-colors hover:text-caramel-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500"
+                >
+                  {labels.clear}
+                </button>
+              </section>
+
+              <CheckoutForm
+                labels={labels.checkout}
+                onValidatedChange={setValidatedDetails}
+              />
+
+              {validatedDetails ? (
+                <OrderSummary
+                  details={validatedDetails}
+                  items={items}
+                  totalPrice={totalPrice}
                   locale={locale}
-                  unitPriceLabel={labels.unitPrice}
-                  lineTotalLabel={labels.lineTotal}
-                  quantityLabel={labels.quantity}
-                  increaseLabel={labels.increase}
-                  decreaseLabel={labels.decrease}
-                  removeLabel={labels.remove}
-                  onIncrement={() => incrementItem(item.id)}
-                  onDecrement={() => decrementItem(item.id)}
-                  onRemove={() => removeItem(item.id)}
+                  labels={labels.checkout}
                 />
-              ))}
-            </ul>
+              ) : null}
+            </>
           )}
         </div>
-
-        {isHydrated && items.length > 0 ? (
-          <footer className="border-t border-brown-900/12 bg-white px-5 py-5 sm:px-7">
-            <div className="flex items-end justify-between gap-4">
-              <p className="font-black">{labels.total}</p>
-              <p className="whitespace-nowrap text-xl font-black text-caramel-500" dir="ltr">
-                {formatLBP(totalPrice)}
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={clearCart}
-              className="mt-4 min-h-11 text-sm font-bold text-brown-700 underline decoration-brown-900/30 underline-offset-4 transition-colors hover:text-caramel-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500"
-            >
-              {labels.clear}
-            </button>
-          </footer>
-        ) : null}
       </section>
     </div>,
     document.body,

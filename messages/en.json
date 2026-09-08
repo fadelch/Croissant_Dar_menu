@@ -43,6 +43,37 @@
     "clear": "Clear cart",
     "total": "Total"
   },
+  "Checkout": {
+    "customerDetails": "Customer details",
+    "detailsDescription": "Enter your details, choose how you would like your order, then review everything below.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "orderType": "Order Type",
+    "dineIn": "Dine-in",
+    "pickup": "Pickup",
+    "delivery": "Delivery",
+    "note": "Order Note",
+    "optional": "Optional",
+    "reviewOrder": "Review Order",
+    "reviewHeading": "Order review",
+    "reviewDescription": "These details are validated and ready for the next ordering step. Your order has not been sent.",
+    "customer": "Customer",
+    "items": "Items",
+    "unitPrice": "Unit price:",
+    "lineTotal": "Line total",
+    "total": "Total",
+    "validation": {
+      "firstNameRequired": "First Name is required.",
+      "firstNameTooLong": "First Name must be 80 characters or fewer.",
+      "lastNameRequired": "Last Name is required.",
+      "lastNameTooLong": "Last Name must be 80 characters or fewer.",
+      "phoneRequired": "Phone number is required.",
+      "phoneInvalid": "Enter a valid phone number using digits, spaces, +, or -.",
+      "orderTypeRequired": "Choose an order type.",
+      "noteTooLong": "Order Note must be 500 characters or fewer."
+    }
+  },
   "Home": {
     "hero": {
       "eyebrow": "Croissant, reimagined",
