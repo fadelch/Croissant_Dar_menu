@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { formatLBP } from "@/lib/formatters/currency";
 import type { PublicMenuItem } from "@/types/public-menu";
 
@@ -7,6 +8,9 @@ type ProductCardProps = {
   item: PublicMenuItem;
   unavailableLabel: string;
   noImageLabel: string;
+  addToCartLabel: string;
+  addedLabel: string;
+  maximumLabel: string;
 };
 
 function ProductImage({
@@ -45,6 +49,9 @@ export function ProductCard({
   item,
   unavailableLabel,
   noImageLabel,
+  addToCartLabel,
+  addedLabel,
+  maximumLabel,
 }: ProductCardProps) {
   const headingId = `menu-item-${item.id}`;
 
@@ -65,7 +72,7 @@ export function ProductCard({
         ) : null}
       </div>
 
-      <div className="flex min-h-48 flex-col p-5 sm:p-6">
+      <div className="flex min-h-64 flex-col p-5 sm:p-6">
         <h3 id={headingId} className="text-xl font-black leading-snug text-brown-900">
           {item.name}
         </h3>
@@ -74,13 +81,31 @@ export function ProductCard({
             {item.description}
           </p>
         ) : null}
-        <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-6">
-          <p className="whitespace-nowrap text-lg font-black text-caramel-500" dir="ltr">
-            {formatLBP(item.price)}
-          </p>
-          {!item.isAvailable ? (
-            <p className="text-xs font-bold text-brown-700">{unavailableLabel}</p>
-          ) : null}
+        <div className="mt-auto pt-6">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <p className="whitespace-nowrap text-lg font-black text-caramel-500" dir="ltr">
+              {formatLBP(item.price)}
+            </p>
+            {!item.isAvailable ? (
+              <p className="text-xs font-bold text-brown-700">{unavailableLabel}</p>
+            ) : null}
+          </div>
+          <div className="mt-5">
+            <AddToCartButton
+              product={{
+                id: item.id,
+                nameAr: item.nameAr,
+                ...(item.nameEn ? { nameEn: item.nameEn } : {}),
+                price: item.price,
+                ...(item.imageUrl ? { imageUrl: item.imageUrl } : {}),
+              }}
+              isAvailable={item.isAvailable}
+              addLabel={addToCartLabel}
+              addedLabel={addedLabel}
+              unavailableLabel={unavailableLabel}
+              maximumLabel={maximumLabel}
+            />
+          </div>
         </div>
       </div>
     </article>

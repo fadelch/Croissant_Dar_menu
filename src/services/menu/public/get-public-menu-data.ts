@@ -35,6 +35,8 @@ function toPublicMenuItem(item: MenuItem, locale: Locale): PublicMenuItem {
     id: item.id,
     categoryId: item.categoryId,
     name: localizedMenuItemName(item, locale),
+    nameAr: item.nameAr,
+    ...(item.nameEn ? { nameEn: item.nameEn } : {}),
     ...(description ? { description } : {}),
     price: item.price,
     ...(item.imageUrl ? { imageUrl: item.imageUrl } : {}),

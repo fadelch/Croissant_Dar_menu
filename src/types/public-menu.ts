@@ -7,6 +7,8 @@ export type PublicMenuItem = {
   id: string;
   categoryId: string;
   name: string;
+  nameAr: string;
+  nameEn?: string;
   description?: string;
   price: number;
   imageUrl?: string;

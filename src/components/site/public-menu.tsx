@@ -15,6 +15,9 @@ type PublicMenuProps = {
   filterLabel: string;
   unavailableLabel: string;
   noImageLabel: string;
+  addToCartLabel: string;
+  addedLabel: string;
+  maximumLabel: string;
 };
 
 const ALL_CATEGORIES = "all";
@@ -26,6 +29,9 @@ export function PublicMenu({
   filterLabel,
   unavailableLabel,
   noImageLabel,
+  addToCartLabel,
+  addedLabel,
+  maximumLabel,
 }: PublicMenuProps) {
   const [selectedCategory, setSelectedCategory] = useState(ALL_CATEGORIES);
   const visibleItems =
@@ -84,6 +90,9 @@ export function PublicMenu({
               item={item}
               unavailableLabel={unavailableLabel}
               noImageLabel={noImageLabel}
+              addToCartLabel={addToCartLabel}
+              addedLabel={addedLabel}
+              maximumLabel={maximumLabel}
             />
           </li>
         ))}

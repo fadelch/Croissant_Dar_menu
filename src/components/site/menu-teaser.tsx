@@ -15,6 +15,7 @@ type MenuTeaserProps = {
 
 export function MenuTeaser({ categories, items, status }: MenuTeaserProps) {
   const t = useTranslations("Home.menu");
+  const cart = useTranslations("Cart");
 
   return (
     <section id="menu" aria-labelledby="menu-heading" className="scroll-mt-24 bg-cream-100 py-20 sm:py-28">
@@ -49,6 +50,9 @@ export function MenuTeaser({ categories, items, status }: MenuTeaserProps) {
             filterLabel={t("filterLabel")}
             unavailableLabel={t("unavailable")}
             noImageLabel={t("noImage")}
+            addToCartLabel={cart("add")}
+            addedLabel={cart("added")}
+            maximumLabel={cart("maximumReached")}
           />
         )}
       </Container>
