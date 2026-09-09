@@ -7,6 +7,7 @@ export type CheckoutDetails = {
   lastName: string;
   phone: string;
   orderType: OrderType;
+  deliveryLocation?: string;
   note?: string;
 };
 

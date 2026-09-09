@@ -53,6 +53,7 @@
     "dineIn": "Dine-in",
     "pickup": "Pickup",
     "delivery": "Delivery",
+    "deliveryLocation": "Delivery Location",
     "note": "Order Note",
     "optional": "Optional",
     "reviewOrder": "Review Order",
@@ -74,6 +75,8 @@
       "phoneRequired": "Phone number is required.",
       "phoneInvalid": "Enter a valid phone number using digits, spaces, +, or -.",
       "orderTypeRequired": "Choose an order type.",
+      "deliveryLocationRequired": "Delivery Location is required for delivery.",
+      "deliveryLocationTooLong": "Delivery Location must be 200 characters or fewer.",
       "noteTooLong": "Order Note must be 500 characters or fewer."
     }
   },

@@ -53,6 +53,7 @@
     "dineIn": "تناول في المطعم",
     "pickup": "استلام",
     "delivery": "توصيل",
+    "deliveryLocation": "موقع التوصيل",
     "note": "ملاحظة على الطلب",
     "optional": "اختياري",
     "reviewOrder": "مراجعة الطلب",
@@ -74,6 +75,8 @@
       "phoneRequired": "رقم الهاتف مطلوب.",
       "phoneInvalid": "أدخل رقم هاتف صحيحًا باستخدام الأرقام أو المسافات أو + أو -.",
       "orderTypeRequired": "اختر نوع الطلب.",
+      "deliveryLocationRequired": "موقع التوصيل مطلوب لطلبات التوصيل.",
+      "deliveryLocationTooLong": "يجب ألا يتجاوز موقع التوصيل 200 حرف.",
       "noteTooLong": "يجب ألا تتجاوز ملاحظة الطلب 500 حرف."
     }
   },

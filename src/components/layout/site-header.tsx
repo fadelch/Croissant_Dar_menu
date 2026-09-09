@@ -79,6 +79,7 @@ export function SiteHeader() {
                 dineIn: checkout("dineIn"),
                 pickup: checkout("pickup"),
                 delivery: checkout("delivery"),
+                deliveryLocation: checkout("deliveryLocation"),
                 note: checkout("note"),
                 optional: checkout("optional"),
                 reviewOrder: checkout("reviewOrder"),
@@ -100,6 +101,12 @@ export function SiteHeader() {
                   phoneRequired: checkout("validation.phoneRequired"),
                   phoneInvalid: checkout("validation.phoneInvalid"),
                   orderTypeRequired: checkout("validation.orderTypeRequired"),
+                  deliveryLocationRequired: checkout(
+                    "validation.deliveryLocationRequired",
+                  ),
+                  deliveryLocationTooLong: checkout(
+                    "validation.deliveryLocationTooLong",
+                  ),
                   noteTooLong: checkout("validation.noteTooLong"),
                 },
               },

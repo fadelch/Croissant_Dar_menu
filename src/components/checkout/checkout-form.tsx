@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState, type FormEvent } from "react";
 
 import {
+  CHECKOUT_DELIVERY_LOCATION_MAX_LENGTH,
   CHECKOUT_NAME_MAX_LENGTH,
   CHECKOUT_NOTE_MAX_LENGTH,
   CHECKOUT_PHONE_MAX_LENGTH,
@@ -26,6 +27,7 @@ export type CheckoutLabels = {
   dineIn: string;
   pickup: string;
   delivery: string;
+  deliveryLocation: string;
   note: string;
   optional: string;
   reviewOrder: string;
@@ -47,6 +49,7 @@ type CheckoutDraft = {
   lastName: string;
   phone: string;
   orderType: OrderType | "";
+  deliveryLocation: string;
   note: string;
 };
 
@@ -60,6 +63,7 @@ const initialDraft: CheckoutDraft = {
   lastName: "",
   phone: "",
   orderType: "",
+  deliveryLocation: "",
   note: "",
 };
 
@@ -84,14 +88,26 @@ export function CheckoutForm({ labels, onValidatedChange }: CheckoutFormProps) {
     field: Field,
     value: CheckoutDraft[Field],
   ) {
-    setDraft((current) => ({ ...current, [field]: value }));
+    setDraft((current) => ({
+      ...current,
+      [field]: value,
+      ...(field === "orderType" && value !== "Delivery"
+        ? { deliveryLocation: "" }
+        : {}),
+    }));
     setErrors((current) => {
-      if (!current[field]) {
+      const shouldClearDeliveryLocation =
+        field === "orderType" && value !== "Delivery";
+
+      if (!current[field] && !shouldClearDeliveryLocation) {
         return current;
       }
 
       const nextErrors = { ...current };
       delete nextErrors[field];
+      if (shouldClearDeliveryLocation) {
+        delete nextErrors.deliveryLocation;
+      }
       return nextErrors;
     });
     onValidatedChange(null);
@@ -133,6 +149,7 @@ export function CheckoutForm({ labels, onValidatedChange }: CheckoutFormProps) {
       firstName: result.data.firstName,
       lastName: result.data.lastName,
       phone: result.data.phone,
+      deliveryLocation: result.data.deliveryLocation ?? "",
       note: result.data.note ?? "",
     }));
     onValidatedChange(result.data);
@@ -223,6 +240,19 @@ export function CheckoutForm({ labels, onValidatedChange }: CheckoutFormProps) {
           ) : null}
         </fieldset>
 
+        {draft.orderType === "Delivery" ? (
+          <CheckoutTextField
+            id="checkout-delivery-location"
+            name="deliveryLocation"
+            label={labels.deliveryLocation}
+            value={draft.deliveryLocation}
+            error={errors.deliveryLocation}
+            autoComplete="street-address"
+            maxLength={CHECKOUT_DELIVERY_LOCATION_MAX_LENGTH}
+            onChange={(value) => updateField("deliveryLocation", value)}
+          />
+        ) : null}
+
         <div>
           <label htmlFor="checkout-note" className="font-bold text-brown-900">
             {labels.note}{" "}
@@ -261,7 +291,7 @@ export function CheckoutForm({ labels, onValidatedChange }: CheckoutFormProps) {
 
 type CheckoutTextFieldProps = {
   id: string;
-  name: "firstName" | "lastName" | "phone";
+  name: "firstName" | "lastName" | "phone" | "deliveryLocation";
   label: string;
   value: string;
   error?: string;
