@@ -1,18 +1,14 @@
 import { useLocale, useTranslations } from "next-intl";
 
+import { AnimatedBrandLogo } from "@/components/ui/animated-brand-logo";
+
 export function BrandMark() {
   const locale = useLocale();
   const t = useTranslations("Brand");
 
   return (
     <span className="inline-flex items-center gap-2.5 sm:gap-3">
-      <span
-        className="grid size-10 place-items-center rounded-full bg-brown-900 text-[0.65rem] font-black tracking-[0.12em] text-cream-50 shadow-sm sm:size-11"
-        aria-hidden="true"
-        dir="ltr"
-      >
-        CD
-      </span>
+      <AnimatedBrandLogo />
       <span className="leading-tight">
         <span className="block max-w-28 truncate text-sm font-black text-brown-900 sm:max-w-none sm:text-base">
           {t("name")}

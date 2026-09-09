@@ -61,6 +61,14 @@ export function OrderSummary({
             {orderTypeLabels[details.orderType]}
           </dd>
         </div>
+        {details.orderType === "Delivery" && details.deliveryLocation ? (
+          <div>
+            <dt className="font-bold text-brown-700">{labels.deliveryLocation}</dt>
+            <dd className="mt-1 whitespace-pre-wrap break-words text-brown-900">
+              {details.deliveryLocation}
+            </dd>
+          </div>
+        ) : null}
         {details.note ? (
           <div>
             <dt className="font-bold text-brown-700">{labels.note}</dt>

@@ -4,6 +4,7 @@ import { ORDER_TYPES, type CheckoutDetails } from "@/lib/checkout/types";
 
 export const CHECKOUT_NAME_MAX_LENGTH = 80;
 export const CHECKOUT_PHONE_MAX_LENGTH = 30;
+export const CHECKOUT_DELIVERY_LOCATION_MAX_LENGTH = 200;
 export const CHECKOUT_NOTE_MAX_LENGTH = 500;
 
 const PHONE_CHARACTERS = /^[0-9+\-\s]+$/;
@@ -18,6 +19,8 @@ export type CheckoutValidationMessages = {
   phoneRequired: string;
   phoneInvalid: string;
   orderTypeRequired: string;
+  deliveryLocationRequired: string;
+  deliveryLocationTooLong: string;
   noteTooLong: string;
 };
 
@@ -59,10 +62,32 @@ export function createCheckoutSchema(messages: CheckoutValidationMessages) {
       .max(CHECKOUT_PHONE_MAX_LENGTH, messages.phoneInvalid)
       .refine(isPracticalPhoneNumber, messages.phoneInvalid),
     orderType: z.enum(ORDER_TYPES, { error: messages.orderTypeRequired }),
+    deliveryLocation: z
+      .string()
+      .trim()
+      .max(
+        CHECKOUT_DELIVERY_LOCATION_MAX_LENGTH,
+        messages.deliveryLocationTooLong,
+      )
+      .transform((value) => value || undefined),
     note: z
       .string()
       .trim()
       .max(CHECKOUT_NOTE_MAX_LENGTH, messages.noteTooLong)
       .transform((value) => value || undefined),
-  }) satisfies z.ZodType<CheckoutDetails, unknown>;
+  })
+    .superRefine((details, context) => {
+      if (details.orderType === "Delivery" && !details.deliveryLocation) {
+        context.addIssue({
+          code: "custom",
+          path: ["deliveryLocation"],
+          message: messages.deliveryLocationRequired,
+        });
+      }
+    })
+    .transform((details) => ({
+      ...details,
+      deliveryLocation:
+        details.orderType === "Delivery" ? details.deliveryLocation : undefined,
+    })) satisfies z.ZodType<CheckoutDetails, unknown>;
 }

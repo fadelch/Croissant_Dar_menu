@@ -6,7 +6,7 @@
   --color-cream-50: #fffaf0;
   --color-cream-100: #f9ecd4;
   --color-caramel-400: #c98545;
-  --color-caramel-500: #ad6931;
+  --color-caramel-500: #a15f29;
   --color-brown-700: #69422c;
   --color-brown-900: #39271f;
   --color-charcoal-950: #211e1b;
@@ -35,14 +35,55 @@ body {
   font-family: var(--font-arabic);
 }
 
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 ::selection {
   background: #c98545;
   color: #fffaf0;
 }
 
+@media (min-width: 64rem) and (max-height: 50rem) {
+  .hero-copy-shell {
+    align-items: flex-start;
+    padding-block: clamp(1.5rem, 4dvh, 2.25rem);
+  }
+
+  .hero-copy-title {
+    margin-top: 1rem;
+    font-size: clamp(3.25rem, 5.1vw, 5.5rem);
+  }
+
+  .hero-copy-description {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .hero-copy-actions,
+  .hero-copy-scroll {
+    margin-top: 1rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  [data-scroll-hero-section] {
+    height: auto !important;
+  }
+
+  [data-scroll-hero-sticky] {
+    position: static;
+    height: auto;
+    min-height: 0;
   }
 
   *,

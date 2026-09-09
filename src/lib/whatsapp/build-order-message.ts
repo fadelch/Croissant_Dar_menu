@@ -28,7 +28,11 @@ export function buildWhatsAppOrderMessage({
   const sections = [
     "Hello Croissant Dar,",
     `Customer details:\nName: ${checkoutDetails.firstName} ${checkoutDetails.lastName}\nPhone: ${checkoutDetails.phone}`,
-    `Order details:\nOrder type: ${checkoutDetails.orderType}`,
+    `Order details:\nOrder type: ${checkoutDetails.orderType}${
+      checkoutDetails.orderType === "Delivery" && checkoutDetails.deliveryLocation
+        ? `\nDelivery location: ${checkoutDetails.deliveryLocation}`
+        : ""
+    }`,
     `I would like to order:\n${orderLines.join("\n")}`,
     ...(note ? [`Order note:\n${note}`] : []),
     `----------------------------\nTotal: ${formatLBP(totalPrice)}`,
