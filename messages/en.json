@@ -173,6 +173,6 @@
     "explore": "Explore",
     "language": "Language",
     "copyright": "© {year} Croissant Dar",
-    "phaseNote": "Explore the current Croissant Dar menu above."
+    "developerCopyright": "© {year} Fadel Chaaban. All rights reserved."
   }
 }

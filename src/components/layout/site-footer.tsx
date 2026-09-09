@@ -59,7 +59,7 @@ export function SiteFooter() {
 
         <div className="flex flex-col gap-2 pt-6 text-xs text-cream-100/50 sm:flex-row sm:items-center sm:justify-between">
           <p>{footer("copyright", { year: new Date().getFullYear() })}</p>
-          <p>{footer("phaseNote")}</p>
+          <p>{footer("developerCopyright", { year: new Date().getFullYear() })}</p>
         </div>
       </Container>
     </footer>
