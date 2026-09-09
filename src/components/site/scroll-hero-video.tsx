@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-const OPEN_FRAME_RATIO = 0.975;
-const CLOSED_FRAME_RATIO = 0.3125;
+const EMPTY_FRAME_RATIO = 0.3125;
+const ASSEMBLED_FRAME_RATIO = 0.975;
 const SMOOTHING_FACTOR = 0.16;
 const PROGRESS_EPSILON = 0.0005;
 const SEEK_EPSILON_SECONDS = 1 / 120;
@@ -67,12 +67,12 @@ export function ScrollHeroVideo({
         return;
       }
 
-      // The supplied source is authored closed-to-open, so scrub its real frames
-      // backward to present the requested open-to-closed customer experience.
-      const openFrameTime = duration * OPEN_FRAME_RATIO;
-      const closedFrameTime = duration * CLOSED_FRAME_RATIO;
+      // Follow the supplied source forward as ingredients drop into place.
+      // Scrolling upward lowers progress and naturally reverses those same frames.
+      const emptyFrameTime = duration * EMPTY_FRAME_RATIO;
+      const assembledFrameTime = duration * ASSEMBLED_FRAME_RATIO;
       const targetTime = clamp(
-        openFrameTime + (closedFrameTime - openFrameTime) * clamp(progress, 0, 1),
+        emptyFrameTime + (assembledFrameTime - emptyFrameTime) * clamp(progress, 0, 1),
         0,
         Math.max(0, duration - SEEK_EPSILON_SECONDS),
       );
