@@ -1,66 +1,20 @@
 import { useTranslations } from "next-intl";
 
+import { ScrollHeroVideo } from "@/components/site/scroll-hero-video";
 import { Container } from "@/components/ui/container";
 
-function HeroMediaPlaceholder() {
-  const brand = useTranslations("Brand");
-  const t = useTranslations("Home.hero");
-
-  return (
-    <div
-      data-phase-13-media-slot="true"
-      className="relative isolate min-h-[25rem] overflow-hidden bg-charcoal-950 sm:min-h-[31rem] lg:min-h-[38rem]"
-      aria-label={t("visualAccessibleLabel")}
-      role="img"
-    >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-90 [background:radial-gradient(circle_at_20%_15%,rgba(201,133,69,0.42),transparent_32%),radial-gradient(circle_at_85%_85%,rgba(173,105,49,0.25),transparent_36%),linear-gradient(145deg,#39271f_0%,#211e1b_62%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-5 border border-cream-100/15 sm:inset-8"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute -end-20 top-10 size-72 rounded-full border-[3rem] border-caramel-400/15 sm:size-96"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute -bottom-24 -start-20 size-64 rotate-12 border-[2.5rem] border-cream-100/8 sm:size-80"
-      />
-
-      <div className="relative flex min-h-[25rem] flex-col justify-between p-9 text-cream-50 sm:min-h-[31rem] sm:p-12 lg:min-h-[38rem] lg:p-14">
-        <p className="text-xs font-black uppercase tracking-[0.24em] text-caramel-400">
-          {t("visualEyebrow")}
-        </p>
-        <div>
-          <p className="font-display text-5xl font-black leading-none sm:text-7xl" dir="ltr">
-            CD
-          </p>
-          <p className="mt-5 max-w-sm text-2xl font-black leading-tight sm:text-3xl">
-            {brand("name")}
-          </p>
-          <p className="mt-3 max-w-sm leading-7 text-cream-100/70">
-            {t("visualPlaceholder")}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function HeroSection() {
+  const brand = useTranslations("Brand");
   const t = useTranslations("Home.hero");
 
   return (
     <section
       id="home"
       aria-labelledby="home-heading"
-      className="relative scroll-mt-24 overflow-hidden border-b border-brown-900/10"
+      className="relative scroll-mt-24 border-b border-brown-900/10"
     >
-      <Container className="grid min-h-[calc(100dvh-5rem)] items-stretch px-0 sm:px-0 lg:grid-cols-[0.94fr_1.06fr] lg:px-12 lg:py-8">
-        <div className="flex items-center px-5 py-14 sm:px-8 sm:py-20 lg:px-0 lg:pe-14">
+      <Container className="grid items-start px-0 sm:px-0 lg:grid-cols-[0.94fr_1.06fr] lg:px-12">
+        <div className="flex items-center px-5 py-14 sm:px-8 sm:py-20 lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] lg:px-0 lg:pe-14 lg:py-8">
           <div className="max-w-3xl">
             <p className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em] text-caramel-500">
               <span aria-hidden="true" className="h-px w-10 bg-caramel-500" />
@@ -104,7 +58,12 @@ export function HeroSection() {
           </div>
         </div>
 
-        <HeroMediaPlaceholder />
+        <ScrollHeroVideo
+          source="/media/croissant-dar-hero-scroll.mp4"
+          fallbackEyebrow={t("visualEyebrow")}
+          fallbackTitle={brand("name")}
+          fallbackDescription={t("visualPlaceholder")}
+        />
       </Container>
     </section>
   );
