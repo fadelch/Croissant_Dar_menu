@@ -9,7 +9,7 @@ export function BrandMark() {
   return (
     <span className="inline-flex items-center gap-2.5 sm:gap-3">
       <AnimatedBrandLogo />
-      <span className="leading-tight">
+      <span className="hidden leading-tight min-[390px]:block">
         <span className="block max-w-28 truncate text-sm font-black text-brown-900 sm:max-w-none sm:text-base">
           {t("name")}
         </span>

@@ -68,7 +68,7 @@ export function AddToCartButton({
       type="button"
       disabled={isDisabled}
       onClick={handleAdd}
-      className="inline-flex min-h-11 items-center justify-center rounded-full bg-brown-900 px-5 text-sm font-black text-cream-50 transition-colors hover:bg-charcoal-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500 disabled:cursor-not-allowed disabled:bg-brown-900/15 disabled:text-brown-700/65"
+      className="inline-flex min-h-12 w-full touch-manipulation items-center justify-center rounded-full bg-brown-900 px-5 text-sm font-black text-cream-50 transition-colors hover:bg-charcoal-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500 disabled:cursor-not-allowed disabled:bg-brown-900/15 disabled:text-brown-700/65 sm:min-h-11 sm:w-auto"
     >
       <span aria-live="polite">{label}</span>
     </button>
