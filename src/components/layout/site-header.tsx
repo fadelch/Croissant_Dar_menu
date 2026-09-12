@@ -24,7 +24,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-brown-900/10 bg-cream-50/95 backdrop-blur">
-      <Container className="flex min-h-20 items-center justify-between gap-3 py-3">
+      <Container className="flex min-h-20 items-center justify-between gap-2 px-3 py-3 min-[360px]:px-5 sm:gap-3 sm:px-8 lg:px-12">
         <Link
           href="#home"
           aria-label={t("homeLabel")}
@@ -45,7 +45,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <LanguageSwitcher
             targetLocale={targetLocale}
             label={targetLanguage}

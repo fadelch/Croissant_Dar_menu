@@ -7,6 +7,7 @@ const ASSEMBLED_FRAME_RATIO = 0.975;
 const SMOOTHING_FACTOR = 0.16;
 const PROGRESS_EPSILON = 0.0005;
 const SEEK_EPSILON_SECONDS = 1 / 120;
+const MOBILE_SEEK_INTERVAL_MS = 50;
 
 type ScrollHeroVideoProps = {
   source: string;
@@ -45,7 +46,9 @@ export function ScrollHeroVideo({
     const stickyElement = sticky;
     const videoElement = video;
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
     let prefersReducedMotion = reducedMotionQuery.matches;
+    let lastSeekTimestamp = 0;
 
     function getScrollProgress() {
       const availableScrollDistance = sectionElement.offsetHeight - stickyElement.offsetHeight;
@@ -64,7 +67,14 @@ export function ScrollHeroVideo({
       const duration = videoElement.duration;
 
       if (!Number.isFinite(duration) || duration <= 0) {
-        return;
+        return false;
+      }
+
+      // Reassigning currentTime while the previous seek is still decoding can
+      // permanently stall scroll-scrubbed video on iOS. Wait for `seeked` and
+      // then apply the latest requested frame instead.
+      if (videoElement.seeking) {
+        return false;
       }
 
       // Follow the supplied source forward as ingredients drop into place.
@@ -80,6 +90,8 @@ export function ScrollHeroVideo({
       if (Math.abs(videoElement.currentTime - targetTime) > SEEK_EPSILON_SECONDS) {
         videoElement.currentTime = targetTime;
       }
+
+      return true;
     }
 
     function stopAnimation() {
@@ -99,8 +111,25 @@ export function ScrollHeroVideo({
         return;
       }
 
-      renderedProgressRef.current += difference * SMOOTHING_FACTOR;
-      seekToProgress(renderedProgressRef.current);
+      const now = performance.now();
+      const isCoarsePointer = coarsePointerQuery.matches;
+
+      if (isCoarsePointer && now - lastSeekTimestamp < MOBILE_SEEK_INTERVAL_MS) {
+        animationFrameRef.current = window.requestAnimationFrame(renderFrame);
+        return;
+      }
+
+      const nextProgress = isCoarsePointer
+        ? targetProgressRef.current
+        : renderedProgressRef.current + difference * SMOOTHING_FACTOR;
+
+      if (!seekToProgress(nextProgress)) {
+        animationFrameRef.current = null;
+        return;
+      }
+
+      renderedProgressRef.current = nextProgress;
+      lastSeekTimestamp = now;
       animationFrameRef.current = window.requestAnimationFrame(renderFrame);
     }
 
@@ -133,14 +162,36 @@ export function ScrollHeroVideo({
 
     function handleSeeked() {
       videoElement.dataset.ready = "true";
+
+      if (
+        Math.abs(targetProgressRef.current - renderedProgressRef.current) >
+        PROGRESS_EPSILON
+      ) {
+        startAnimation();
+      }
+    }
+
+    function handleLoadedData() {
+      videoElement.dataset.ready = "true";
     }
 
     function handleError() {
       delete videoElement.dataset.ready;
     }
 
-    function handlePlay() {
-      videoElement.pause();
+    function unlockVideoForIos() {
+      const playAttempt = videoElement.play();
+
+      if (playAttempt) {
+        void playAttempt
+          .then(() => {
+            videoElement.pause();
+            syncVideoToPage();
+          })
+          .catch(() => {
+            // The normal metadata/seek path remains available if playback is blocked.
+          });
+      }
     }
 
     function handleReducedMotionChange(event: MediaQueryListEvent) {
@@ -152,13 +203,22 @@ export function ScrollHeroVideo({
 
     sectionElement.dataset.reducedMotion = String(prefersReducedMotion);
     videoElement.addEventListener("loadedmetadata", handleMetadata);
+    videoElement.addEventListener("loadeddata", handleLoadedData);
     videoElement.addEventListener("seeked", handleSeeked);
     videoElement.addEventListener("error", handleError);
-    videoElement.addEventListener("play", handlePlay);
+    sectionElement.addEventListener("touchstart", unlockVideoForIos, {
+      passive: true,
+      once: true,
+    });
     window.addEventListener("scroll", updateTargetProgress, { passive: true });
     window.addEventListener("resize", updateTargetProgress, { passive: true });
     window.visualViewport?.addEventListener("resize", updateTargetProgress, { passive: true });
-    reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
+
+    if (typeof reducedMotionQuery.addEventListener === "function") {
+      reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
+    } else {
+      reducedMotionQuery.addListener(handleReducedMotionChange);
+    }
 
     if (videoElement.readyState >= HTMLMediaElement.HAVE_METADATA) {
       handleMetadata();
@@ -169,13 +229,19 @@ export function ScrollHeroVideo({
     return () => {
       stopAnimation();
       videoElement.removeEventListener("loadedmetadata", handleMetadata);
+      videoElement.removeEventListener("loadeddata", handleLoadedData);
       videoElement.removeEventListener("seeked", handleSeeked);
       videoElement.removeEventListener("error", handleError);
-      videoElement.removeEventListener("play", handlePlay);
+      sectionElement.removeEventListener("touchstart", unlockVideoForIos);
       window.removeEventListener("scroll", updateTargetProgress);
       window.removeEventListener("resize", updateTargetProgress);
       window.visualViewport?.removeEventListener("resize", updateTargetProgress);
-      reducedMotionQuery.removeEventListener("change", handleReducedMotionChange);
+
+      if (typeof reducedMotionQuery.removeEventListener === "function") {
+        reducedMotionQuery.removeEventListener("change", handleReducedMotionChange);
+      } else {
+        reducedMotionQuery.removeListener(handleReducedMotionChange);
+      }
     };
   }, []);
 
@@ -221,9 +287,10 @@ export function ScrollHeroVideo({
             muted
             playsInline
             preload="auto"
+            disablePictureInPicture
             tabIndex={-1}
             aria-hidden="true"
-            className="absolute inset-0 size-full bg-charcoal-950 object-contain opacity-0 transition-opacity duration-500 data-[ready=true]:opacity-100 motion-reduce:transition-none"
+            className="pointer-events-none absolute inset-0 size-full bg-charcoal-950 object-contain opacity-0 transition-opacity duration-500 data-[ready=true]:opacity-100 motion-reduce:transition-none"
           />
         </div>
       </div>

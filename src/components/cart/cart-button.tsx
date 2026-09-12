@@ -36,7 +36,7 @@ export function CartButton({
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-controls="cart-panel"
-        className="relative inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-brown-900/15 bg-white px-3 text-brown-900 transition-colors hover:bg-cream-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500 xl:px-4"
+        className="relative inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center gap-2 rounded-full border border-brown-900/15 bg-white px-3 text-brown-900 transition-colors hover:bg-cream-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500 xl:px-4"
       >
         <svg
           viewBox="0 0 24 24"

@@ -45,7 +45,7 @@ export function MobileNavigation({
         aria-controls="mobile-site-navigation"
         aria-label={isOpen ? closeLabel : openLabel}
         onClick={() => setIsOpen((current) => !current)}
-        className="grid size-11 place-items-center rounded-full border border-brown-900/15 bg-white text-brown-900 transition-colors hover:bg-cream-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500"
+        className="grid size-11 touch-manipulation place-items-center rounded-full border border-brown-900/15 bg-white text-brown-900 transition-colors hover:bg-cream-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-500"
       >
         <span aria-hidden="true" className="relative block h-4 w-5">
           <span
